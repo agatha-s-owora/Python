@@ -24,11 +24,8 @@ class Logic(QMainWindow, Ui_MainWindow):
             weather_data = website_response.json()
 
             # Check response code
-            match weather_data["cod"]:
-                case 200:
-                    self.display_weather(weather_data)
-                case 404:
-                    self.display_error(weather_data)
+            if weather_data["cod"] == 200:
+                self.display_weather(weather_data)
         except requests.exceptions.HTTPError as http_error:           # statuscode between 400 and 500
             match website_response.status_code:
                 case 400:
